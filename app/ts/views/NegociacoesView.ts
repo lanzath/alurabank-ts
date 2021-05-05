@@ -1,14 +1,5 @@
-class NegociacoesView {
-
-    private _elemento: Element;
-
-    constructor(seletor: string) {
-        this._elemento = document.querySelector(seletor);
-    }
-
-    update(modelo: Negociacoes): void {
-        this._elemento.innerHTML = this.template(modelo);
-    }
+// Ao extender métodos da classe pai View, utiliza o tipo Negociacoes.
+class NegociacoesView extends View<Negociacoes> {
 
     template(modelo: Negociacoes): string {
         return `
