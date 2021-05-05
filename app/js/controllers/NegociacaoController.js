@@ -2,6 +2,7 @@ class NegociacaoController {
     constructor() {
         this._negociacoes = new Negociacoes();
         this._negociacoesView = new NegociacoesView('#negociacoesView');
+        this._mensagemView = new MensagemView('#mensagemView');
         // <HTMLInputElement> é o casting explícito para converter em uma tipagem mais específica
         this._inputData = document.querySelector('#data');
         this._inputQuantidade = document.querySelector('#quantidade');
@@ -18,5 +19,6 @@ class NegociacaoController {
         +this._inputQuantidade.value, +this._inputValor.value);
         this._negociacoes.adiciona(negociacao);
         this._negociacoesView.update(this._negociacoes);
+        this._mensagemView.update('Negociação adicionada com sucesso!');
     }
 }
