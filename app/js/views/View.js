@@ -1,10 +1,8 @@
-// Classe view utiliza uma tipagem genérica T
-// Uma classe abstrata não permite que esta seja instanciada.
 class View {
     constructor(seletor) {
-        this._elemento = document.querySelector(seletor);
+        this._elemento = $(seletor);
     }
     update(modelo) {
-        this._elemento.innerHTML = this.template(modelo);
+        this._elemento.html(this.template(modelo));
     }
 }

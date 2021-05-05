@@ -1,4 +1,3 @@
-// Ao extender métodos da classe pai View, utiliza o tipo Negociacoes.
 class NegociacoesView extends View {
     template(modelo) {
         return `
