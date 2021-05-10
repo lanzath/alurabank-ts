@@ -1,4 +1,6 @@
-class Negociacoes {
+import { Negociacao } from './Negociacao';
+
+export class Negociacoes {
 
     // _negociacoes é um array que contém instâncias da Classe Negociacao.
     private _negociacoes: Negociacao[] = [];

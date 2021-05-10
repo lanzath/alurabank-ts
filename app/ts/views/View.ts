@@ -1,6 +1,6 @@
 // Classe view utiliza uma tipagem genérica T
 // Uma classe abstrata não permite que esta seja instanciada.
-abstract class View<T> {
+export abstract class View<T> {
 
     protected _elemento: JQuery;
 

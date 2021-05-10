@@ -1,5 +1,8 @@
+import { View } from './View';
+import { Negociacoes } from '../models/Negociacoes';
+
 // Ao extender métodos da classe pai View, utiliza o tipo Negociacoes.
-class NegociacoesView extends View<Negociacoes> {
+export class NegociacoesView extends View<Negociacoes> {
 
     template(modelo: Negociacoes): string {
         return `
