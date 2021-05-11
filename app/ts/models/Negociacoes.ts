@@ -11,7 +11,7 @@ export class Negociacoes {
 
     paraArray(): Negociacao[] {
 
-        // Devolve um novo array que é cópia do original.
-        return [].concat(this._negociacoes);
+        // Devolve um novo array de Negociacao que é cópia do original.
+        return ([] as Negociacao[]).concat(this._negociacoes);
     }
 }
