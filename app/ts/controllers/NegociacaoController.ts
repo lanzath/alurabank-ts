@@ -1,7 +1,5 @@
-import { Negociacoes } from '../models/Negociacoes';
-import { Negociacao } from '../models/Negociacao';
-import { NegociacoesView } from '../views/NegociacoesView';
-import { MensagemView } from '../views/MensagemView';
+import { Negociacao, Negociacoes } from '../models/index';
+import { NegociacoesView, MensagemView } from '../views/index';
 
 export class NegociacaoController {
 
@@ -24,9 +22,16 @@ export class NegociacaoController {
   adiciona(event: Event): void {
     event.preventDefault();
 
+    // replace usa o regex /-/g para buscar TODOS(g) os '-' e substituí-los por ','
+    let data = new Date(this._inputData.val().replace(/-/g, ','));
+
+    if (!this._ehDiaUtil(data)) {
+      this._mensagemView.update('Somente negociações em dias úteis.');
+      return
+    }
+
     const negociacao = new Negociacao(
-      // replace usa o regex /-/g para buscar TODOS(g) os '-' e substituí-los por ','
-      new Date(this._inputData.val().replace(/-/g, ',')),
+      data,
 
       // + converte(cast) a string para number
       +this._inputQuantidade.val(),
@@ -38,4 +43,18 @@ export class NegociacaoController {
     this._negociacoesView.update(this._negociacoes);
     this._mensagemView.update('Negociação adicionada com sucesso!');
   }
+
+  private _ehDiaUtil(data: Date): boolean {
+    return data.getDay() != DiaDaSemana.Sabado && data.getDay() != DiaDaSemana.Domingo;
+  }
+}
+
+enum DiaDaSemana {
+  Domingo,
+  Segunda,
+  Terça,
+  Quarta,
+  Quinta,
+  Sexta,
+  Sabado
 }
