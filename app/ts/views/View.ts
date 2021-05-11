@@ -10,7 +10,7 @@ export abstract class View<T> {
         this._escapar = escapar;
     }
 
-    update(modelo: T): void {
+	update(modelo: T): void {
         let template = this.template(modelo);
 
         if (this._escapar) {
