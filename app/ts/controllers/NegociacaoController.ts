@@ -1,60 +1,62 @@
 import { Negociacao, Negociacoes } from '../models/index';
-import { NegociacoesView, MensagemView } from '../views/index';
+import { MensagemView, NegociacoesView } from '../views/index';
+import { domInject } from '../helpers/decorators/index';
 
 export class NegociacaoController {
 
-  private _inputData: JQuery;
-  private _inputQuantidade: JQuery;
-  private _inputValor: JQuery;
-  private _negociacoes = new Negociacoes();
-  private _negociacoesView = new NegociacoesView('#negociacoesView');
-  private _mensagemView = new MensagemView('#mensagemView');
+	@domInject('#data')
+    private _inputData: JQuery;
 
-  constructor() {
-    this._inputData = $('#data');
-    this._inputQuantidade = $('#quantidade');
-    this._inputValor = $('#valor');
+	@domInject('#quantidade')
+    private _inputQuantidade: JQuery;
 
-    // Ao instanciar o controller renderiza os dados baseado nas negociações.
-    this._negociacoesView.update(this._negociacoes);
-  }
+	@domInject('#valor')
+	private _inputValor: JQuery;
 
-  adiciona(event: Event): void {
-    event.preventDefault();
+	private _negociacoes = new Negociacoes();
+    private _negociacoesView = new NegociacoesView('#negociacoesView');
+    private _mensagemView = new MensagemView('#mensagemView');
 
-    // replace usa o regex /-/g para buscar TODOS(g) os '-' e substituí-los por ','
-    let data = new Date(this._inputData.val().replace(/-/g, ','));
-
-    if (!this._ehDiaUtil(data)) {
-      this._mensagemView.update('Somente negociações em dias úteis.');
-      return
+    constructor() {
+        // Ao instanciar o controller renderiza os dados baseado nas negociações.
+        this._negociacoesView.update(this._negociacoes);
     }
 
-    const negociacao = new Negociacao(
-      data,
+	adiciona(event: Event): void {
+        event.preventDefault();
 
-      // + converte(cast) a string para number
-      +this._inputQuantidade.val(),
-      +this._inputValor.val()
-    );
+        // replace usa o regex /-/g para buscar TODOS(g) os '-' e substituí-los por ','
+        let data = new Date(this._inputData.val().replace(/-/g, ','));
 
-    this._negociacoes.adiciona(negociacao);
+        if (!this._ehDiaUtil(data)) {
+            this._mensagemView.update('Somente negociações em dias úteis.');
+            return
+        }
 
-    this._negociacoesView.update(this._negociacoes);
-    this._mensagemView.update('Negociação adicionada com sucesso!');
-  }
+        const negociacao = new Negociacao(
+            data,
 
-  private _ehDiaUtil(data: Date): boolean {
-    return data.getDay() != DiaDaSemana.Sabado && data.getDay() != DiaDaSemana.Domingo;
-  }
+            // + converte(cast) a string para number
+            +this._inputQuantidade.val(),
+            +this._inputValor.val()
+        );
+
+        this._negociacoes.adiciona(negociacao);
+        this._negociacoesView.update(this._negociacoes);
+        this._mensagemView.update('Negociação adicionada com sucesso!');
+    }
+
+    private _ehDiaUtil(data: Date): boolean {
+        return data.getDay() != DiaDaSemana.Sabado && data.getDay() != DiaDaSemana.Domingo;
+    }
 }
 
 enum DiaDaSemana {
-  Domingo,
-  Segunda,
-  Terça,
-  Quarta,
-  Quinta,
-  Sexta,
-  Sabado
+    Domingo,
+    Segunda,
+    Terça,
+    Quarta,
+    Quinta,
+    Sexta,
+    Sabado
 }
