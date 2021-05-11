@@ -3,13 +3,22 @@
 export abstract class View<T> {
 
     protected _elemento: JQuery;
+    private _escapar: boolean;
 
-    constructor(seletor: string) {
+    constructor(seletor: string, escapar: boolean = false) {
         this._elemento = $(seletor);
+        this._escapar = escapar;
     }
 
     update(modelo: T): void {
-        this._elemento.html(this.template(modelo));
+        let template = this.template(modelo);
+
+        if (this._escapar) {
+            // Caso queira remover qualquer tipo de script injetado no código, substitui por uma string vazia o script
+            template = template.replace(/<script>[\s\S]*?<\/script>/, '')
+        }
+
+        this._elemento.html(template);
     }
 
     // Método abstrata não tem implementação, o método recebe um modelo genérico
