@@ -13,3 +13,4 @@ Tópicos abordados:
 Versão utilizada do **Typescript**: 2.3.2.
 
 Curso: [TypeScript parte 1: Evoluindo seu Javascript](https://www.alura.com.br/curso-online-typescript-parte1)
+Curso: [TypeScript parte 1: Evoluindo seu Javascript](https://www.alura.com.br/curso-online-typescript-parte2)
