@@ -11,6 +11,7 @@ System.register([], function (exports_1, context_1) {
                     this._escapar = escapar;
                 }
                 update(modelo) {
+                    const t1 = performance.now();
                     let template = this.template(modelo);
                     if (this._escapar) {
                         template = template.replace(/<script>[\s\S]*?<\/script>/, '');
