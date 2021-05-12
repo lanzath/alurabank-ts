@@ -1,5 +1,5 @@
-export abstract class Imprimivel {
+export interface Imprimivel {
 
-    // Classe filha que herdar Imprimivel é obrigada a implementar o método abstrato paraTexto.
-    abstract paraTexto(): void;
+    // Classe que implementar Imprimivel é obrigada a implementar o método paraTexto.
+    paraTexto(): void;
 }

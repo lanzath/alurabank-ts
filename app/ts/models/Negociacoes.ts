@@ -1,7 +1,7 @@
 import { Negociacao } from './Negociacao';
 import { Imprimivel } from './Imprimivel';
 
-export class Negociacoes extends Imprimivel {
+export class Negociacoes implements Imprimivel {
 
     // _negociacoes é um array que contém instâncias da Classe Negociacao.
     private _negociacoes: Negociacao[] = [];

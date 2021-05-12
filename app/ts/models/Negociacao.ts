@@ -1,11 +1,8 @@
 import { Imprimivel } from './Imprimivel';
 
-export class Negociacao extends Imprimivel {
+export class Negociacao implements Imprimivel {
 
-	constructor(readonly data: Date, readonly quantidade: number, readonly valor: number) {
-		// super() é o construtor padrão (ausência de constructor) da classe pai (Imprimivel)
-		super();
-	}
+	constructor(readonly data: Date, readonly quantidade: number, readonly valor: number) {	}
 
 	get volume(): number {
 		return this.quantidade * this.valor;
